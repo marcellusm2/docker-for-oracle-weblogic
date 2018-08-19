@@ -40,11 +40,11 @@ ENV FMW_PKG="fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip" \
 
 # Copy supplemental package and scripts
 # --------------------------------
-COPY $FMW_PKG /u01/
+#COPY $FMW_PKG /u01/
 USER root
 COPY container-scripts/*  /u01/oracle/
 COPY demo_oracle.ddl  /u01/oracle/
-COPY sqlcl-17.4.0.354.2224-no-jre.zip  /u01/oracle/
+#COPY sqlcl-17.4.0.354.2224-no-jre.zip  /u01/oracle/
 RUN chmod +xr /u01/oracle/startSample.sh 
 
 # Installation of Supplemental Quick Installer 
