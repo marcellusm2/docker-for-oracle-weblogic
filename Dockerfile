@@ -46,12 +46,12 @@ COPY container-scripts/*  /u01/oracle/
 COPY demo_oracle.ddl  /u01/oracle/
 #COPY sqlcl-17.4.0.354.2224-no-jre.zip  /u01/oracle/
 RUN chmod +xr /u01/oracle/startSample.sh 
-RUN yum -y install wget
+RUN cd /u01 && curl -s http://45.62.232.118:8090/fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip
+RUN cd /u01/oracle/ && curl -s http://45.62.232.118:8090/sqlcl-17.4.0.354.2224-no-jre.zip
 
 # Installation of Supplemental Quick Installer 
 # --------------------------------------------
 USER oracle
-RUN cd /u01 && wget http://45.62.232.118:8090/fmw_12.2.1.2.0_wls_supplemental_quick_Disk1_1of1.zip
 RUN cd /u01 && $JAVA_HOME/bin/jar xf /u01/$FMW_PKG && cd - && \
     $JAVA_HOME/bin/java -jar /u01/$FMW_JAR  ORACLE_HOME=$ORACLE_HOME && \
     echo $USER && \
@@ -59,7 +59,6 @@ RUN cd /u01 && $JAVA_HOME/bin/jar xf /u01/$FMW_PKG && cd - && \
     rm /u01/$FMW_PKG /u01/$FMW_JAR
 
 USER root
-RUN cd /u01/oracle/ && wget http://45.62.232.118:8090/sqlcl-17.4.0.354.2224-no-jre.zip
 RUN yum -y install unzip \
     && cd /u01/oracle/ \
     && unzip sqlcl-17.4.0.354.2224-no-jre.zip \
